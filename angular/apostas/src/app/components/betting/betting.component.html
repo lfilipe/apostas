@@ -1,0 +1,91 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3 class="sidebar-title">Filtros</h3>
+      
+      <div class="filter-group">
+        <h4>Status</h4>
+        <label class="filter-option">
+          <input type="checkbox" checked> Agendados
+        </label>
+        <label class="filter-option">
+          <input type="checkbox"> Ao Vivo
+        </label>
+        <label class="filter-option">
+          <input type="checkbox"> Finalizados
+        </label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Data</h4>
+        <label class="filter-option">
+          <input type="radio" name="date" checked> Todos
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="date"> Hoje
+        </label>
+        <label class="filter-option">
+          <input type="radio" name="date"> Próximos 7 dias
+        </label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Times</h4>
+        <input type="text" 
+               class="filter-search" 
+               placeholder="Buscar time..."
+               [(ngModel)]="teamFilter">
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="competition-header">
+        <div class="sport-title">
+          <span class="sport-icon">⚽</span>
+          <h2>Football (05)</h2>
+        </div>
+        <a href="#" class="see-all">See all →</a>
+      </div>
+
+      <div class="league-section">
+        <h3 class="league-title">UEFA Champions League (3)</h3>
+        
+        <div class="matches-list">
+          <div *ngFor="let match of matches" class="match-row">
+            <div class="match-info">
+              <div class="match-time">
+                <div class="time">{{match.matchDateTime | date:'HH:mm'}}</div>
+                <div class="date">{{match.matchDateTime | date:'dd MMM'}}</div>
+              </div>
+              
+              <div class="teams">
+                <div class="team">
+                  <img [src]="match.homeTeamPicture" alt="" class="team-icon">
+                  {{match.homeTeamName}}
+                </div>
+                <div class="team">
+                  <img [src]="match.awayTeamPicture" alt="" class="team-icon">
+                  {{match.awayTeamName}}
+                </div>
+              </div>
+            </div>
+
+            <div class="match-odds">
+              <button class="odd-btn" [class.selected]="selectedOdd === 'home'" (click)="selectOdd('home')">
+                {{match.odds?.home | number:'1.2-2'}}
+              </button>
+              <button class="odd-btn" [class.selected]="selectedOdd === 'draw'" (click)="selectOdd('draw')">
+                {{match.odds?.draw | number:'1.2-2'}}
+              </button>
+              <button class="odd-btn" [class.selected]="selectedOdd === 'away'" (click)="selectOdd('away')">
+                {{match.odds?.away | number:'1.2-2'}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div> 

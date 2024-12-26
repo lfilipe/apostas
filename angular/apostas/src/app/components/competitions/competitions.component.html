@@ -1,0 +1,23 @@
+<div class="osui-container">
+  <osui-loading *ngIf="loading"></osui-loading>
+  
+  <div *ngIf="error" class="osui-error">{{error}}</div>
+
+  <div class="osui-section">
+    <h2 class="osui-heading">Competições Disponíveis</h2>
+
+    <div class="osui-competitions-grid">
+      <osui-card *ngFor="let competition of competitions" 
+                 (click)="navigateToMatches(competition)">
+        <div class="osui-competition-content">
+          <h3 class="osui-competition-name">{{competition.name}}</h3>
+          <span class="osui-competition-status" 
+                [class.active]="competition.isActive">
+            {{competition.isActive ? 'Ativo' : 'Inativo'}}
+          </span>
+        </div>
+        <osui-button variant="primary">Ver Jogos</osui-button>
+      </osui-card>
+    </div>
+  </div>
+</div> 
